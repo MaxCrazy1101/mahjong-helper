@@ -5,7 +5,9 @@ import (
 	"fmt"
 	"github.com/MaxCrazy1101/mahjong-helper/platform/majsoul/api"
 	"github.com/MaxCrazy1101/mahjong-helper/platform/majsoul/proto/lq"
-	"github.com/golang/protobuf/proto"
+	"google.golang.org/protobuf/proto"
+	"google.golang.org/protobuf/reflect/protoreflect"
+	"google.golang.org/protobuf/reflect/protoregistry"
 	"os"
 	"reflect"
 	"strings"
@@ -50,12 +52,13 @@ func (mr *MessageReceiver) run() {
 			}
 			notifyName = notifyName[1:] // 移除开头的 .
 
-			mt := proto.MessageType(notifyName)
-			if mt == nil {
+			//mt := proto.MessageType(notifyName)
+			mt, err := protoregistry.GlobalTypes.FindMessageByName(protoreflect.FullName(notifyName))
+			if err != nil {
 				fmt.Fprintf(os.Stderr, "MessageReceiver.run 未找到 %s，请检查！\n", notifyName)
 				continue
 			}
-			messagePtr := reflect.New(mt.Elem())
+			messagePtr := mt.New()
 			if err := proto.Unmarshal(data, messagePtr.Interface().(proto.Message)); err != nil {
 				fmt.Fprintln(os.Stderr, "MessageReceiver.run.proto.Unmarshal.NOTIFY", notifyName, err)
 				continue

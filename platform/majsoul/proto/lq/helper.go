@@ -2,10 +2,12 @@ package lq
 
 import (
 	"fmt"
-	"time"
+	"google.golang.org/protobuf/proto"
+	"google.golang.org/protobuf/reflect/protoreflect"
+	"google.golang.org/protobuf/reflect/protoregistry"
 	"reflect"
 	"strings"
-	"github.com/golang/protobuf/proto"
+	"time"
 )
 
 var (
@@ -58,14 +60,20 @@ func (l FriendList) String() string {
 }
 
 func (m *ActionPrototype) ParseData() (proto.Message, error) {
+	// 构造消息类型的全名，这里假设您的包名是 "lq"
 	name := "lq." + m.Name
-	mt := proto.MessageType(name)
-	if mt == nil {
-		return nil, fmt.Errorf("ActionPrototype.ParseData 未找到 %s，请检查！", name)
+
+	// 查找消息类型
+	mt, err := protoregistry.GlobalTypes.FindMessageByName(protoreflect.FullName(name))
+	if err != nil {
+		return nil, fmt.Errorf("ActionPrototype.ParseData 未找到类型 %s，请检查！", name)
 	}
-	messagePtr := reflect.New(mt.Elem())
+
+	// 创建消息类型的实例
+	messagePtr := mt.New()
 	if err := proto.Unmarshal(m.Data, messagePtr.Interface().(proto.Message)); err != nil {
 		return nil, err
 	}
+	// 返回反序列化后的消息实例
 	return messagePtr.Interface().(proto.Message), nil
 }

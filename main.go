@@ -6,9 +6,7 @@ import (
 	"github.com/MaxCrazy1101/mahjong-helper/util"
 	"github.com/MaxCrazy1101/mahjong-helper/util/model"
 	"github.com/fatih/color"
-	"math/rand"
 	"strings"
-	"time"
 )
 
 var (
@@ -30,8 +28,6 @@ var (
 )
 
 func init() {
-	rand.Seed(time.Now().UnixNano())
-
 	flag.BoolVar(&considerOldYaku, "old", false, "允许古役")
 	flag.BoolVar(&isMajsoul, "majsoul", false, "雀魂助手")
 	flag.BoolVar(&isTenhou, "tenhou", false, "天凤助手")

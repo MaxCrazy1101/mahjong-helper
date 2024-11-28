@@ -8,11 +8,12 @@ import (
 	"github.com/MaxCrazy1101/mahjong-helper/platform/majsoul/api"
 	"github.com/MaxCrazy1101/mahjong-helper/platform/majsoul/proto/lq"
 	"github.com/MaxCrazy1101/mahjong-helper/platform/majsoul/tool"
-	"github.com/golang/protobuf/proto"
 	"github.com/satori/go.uuid"
+	"google.golang.org/protobuf/proto"
+	"google.golang.org/protobuf/reflect/protoreflect"
+	"google.golang.org/protobuf/reflect/protoregistry"
 	"io/ioutil"
 	"os"
-	"reflect"
 )
 
 const (
@@ -45,13 +46,17 @@ func genReqLogin(username string, password string) (*lq.ReqLogin, error) {
 		Password:  password,
 		Reconnect: false,
 		Device: &lq.ClientDeviceInfo{
-			DeviceType: "pc",
-			Os:         "",
-			OsVersion:  "",
-			Browser:    "safari",
+			Platform:  "pc",
+			Os:        "",
+			OsVersion: "",
+			IsBrowser: true,
+			Software:  "safari",
 		},
-		RandomKey:         randomKey,          // 例如 aa566cfc-547e-4cc0-a36f-2ebe6269109b
-		ClientVersion:     version.ResVersion, // 0.5.162.w
+		RandomKey: randomKey, // 例如 aa566cfc-547e-4cc0-a36f-2ebe6269109b
+		ClientVersion: &lq.ClientVersionInfo{
+			Resource: version.ResVersion,
+			Package:  version.Code,
+		}, // 0.11.107.w
 		GenAccessToken:    true,
 		CurrencyPlatforms: []uint32{2}, // 1-inGooglePlay, 2-inChina
 	}, nil
@@ -139,11 +144,11 @@ func DownloadRecords(username string, password string, recordType uint32) error 
 			}
 
 			name = name[1:] // 移除开头的 .
-			mt := proto.MessageType(name)
-			if mt == nil {
+			mt, err := protoregistry.GlobalTypes.FindMessageByName(protoreflect.FullName(name))
+			if err != nil {
 				return fmt.Errorf("未找到 %s，请检查代码！", name)
 			}
-			messagePtr := reflect.New(mt.Elem())
+			messagePtr := mt.New()
 			if err := proto.Unmarshal(data, messagePtr.Interface().(proto.Message)); err != nil {
 				return err
 			}

@@ -12,7 +12,7 @@ const (
 
 // for normal requests
 const (
-	majsoulJSURLPrefixZH = "https://www.majsoul.com/1/"
+	majsoulJSURLPrefixZH = "https://game.maj-soul.com/1/"
 	majsoulJSURLPrefixEN = "https://mahjongsoul.game.yo-star.com/"
 	majsoulJSURLPrefixJP = "https://game.mahjongsoul.com/"
 
