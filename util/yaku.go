@@ -1,7 +1,7 @@
 package util
 
 import (
-	"github.com/EndlessCheng/mahjong-helper/util/model"
+	"github.com/MaxCrazy1101/mahjong-helper/util/model"
 	"sort"
 )
 
@@ -222,7 +222,7 @@ func (hi *_handInfo) _chantai() bool {
 		return false
 	}
 	for _, tile := range shuntsuFirstTiles {
-		if !isYaochupai(tile) && !isYaochupai(tile + 2) {
+		if !isYaochupai(tile) && !isYaochupai(tile+2) {
 			return false
 		}
 	}

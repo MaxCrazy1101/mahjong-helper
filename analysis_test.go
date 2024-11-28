@@ -1,8 +1,8 @@
 package main
 
 import (
+	"github.com/MaxCrazy1101/mahjong-helper/util/model"
 	"testing"
-	"github.com/EndlessCheng/mahjong-helper/util/model"
 )
 
 func TestAnalysis(t *testing.T) {

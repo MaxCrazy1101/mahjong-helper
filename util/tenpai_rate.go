@@ -1,6 +1,6 @@
 package util
 
-import "github.com/EndlessCheng/mahjong-helper/util/model"
+import "github.com/MaxCrazy1101/mahjong-helper/util/model"
 
 // 没有立直时，根据玩家的副露、手切来判断其听牌率 (0-100)
 // TODO: 传入 *model.PlayerInfo

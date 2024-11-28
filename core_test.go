@@ -1,13 +1,13 @@
 package main
 
 import (
-	"testing"
+	"encoding/json"
+	"fmt"
+	"github.com/MaxCrazy1101/mahjong-helper/util/debug"
+	"github.com/stretchr/testify/assert"
 	"io/ioutil"
 	"strings"
-	"fmt"
-	"encoding/json"
-	"github.com/EndlessCheng/mahjong-helper/util/debug"
-	"github.com/stretchr/testify/assert"
+	"testing"
 )
 
 func Test_majsoul_analysis(t *testing.T) {

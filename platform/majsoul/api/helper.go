@@ -1,8 +1,8 @@
 package api
 
 import (
+	"github.com/MaxCrazy1101/mahjong-helper/platform/majsoul/proto/lq"
 	"github.com/golang/protobuf/proto"
-	"github.com/EndlessCheng/mahjong-helper/platform/majsoul/proto/lq"
 )
 
 func WrapMessage(name string, message proto.Message) (data []byte, err error) {

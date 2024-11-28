@@ -1,10 +1,10 @@
 package util
 
 import (
-	"strings"
 	"errors"
 	"fmt"
-	"github.com/EndlessCheng/mahjong-helper/util/model"
+	"github.com/MaxCrazy1101/mahjong-helper/util/model"
+	"strings"
 )
 
 func Tiles34ToTiles(tiles34 []int) (tiles []int) {

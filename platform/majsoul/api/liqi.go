@@ -3,8 +3,8 @@ package api
 import (
 	"encoding/binary"
 	"fmt"
-	"github.com/EndlessCheng/mahjong-helper/platform/majsoul/proto/lq"
-	"github.com/EndlessCheng/mahjong-helper/platform/majsoul/tool"
+	"github.com/MaxCrazy1101/mahjong-helper/platform/majsoul/proto/lq"
+	"github.com/MaxCrazy1101/mahjong-helper/platform/majsoul/tool"
 	"github.com/golang/protobuf/proto"
 	"github.com/gorilla/websocket"
 	"net/http"

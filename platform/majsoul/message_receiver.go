@@ -1,14 +1,14 @@
 package majsoul
 
 import (
-	"github.com/golang/protobuf/proto"
-	"github.com/EndlessCheng/mahjong-helper/platform/majsoul/api"
+	"encoding/binary"
 	"fmt"
+	"github.com/MaxCrazy1101/mahjong-helper/platform/majsoul/api"
+	"github.com/MaxCrazy1101/mahjong-helper/platform/majsoul/proto/lq"
+	"github.com/golang/protobuf/proto"
 	"os"
 	"reflect"
-	"encoding/binary"
 	"strings"
-	"github.com/EndlessCheng/mahjong-helper/platform/majsoul/proto/lq"
 )
 
 // 若 NotifyMessage 不为空，这该消息为通知，RequestMessage 和 ResponseMessage 字段为空

@@ -2,9 +2,9 @@ package main
 
 import (
 	"fmt"
-	"time"
-	"github.com/EndlessCheng/mahjong-helper/util"
+	"github.com/MaxCrazy1101/mahjong-helper/util"
 	"strconv"
+	"time"
 )
 
 // 观战基本信息

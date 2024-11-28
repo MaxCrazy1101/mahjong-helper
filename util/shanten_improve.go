@@ -2,7 +2,7 @@ package util
 
 import (
 	"fmt"
-	"github.com/EndlessCheng/mahjong-helper/util/model"
+	"github.com/MaxCrazy1101/mahjong-helper/util/model"
 	"math"
 	"sort"
 )
